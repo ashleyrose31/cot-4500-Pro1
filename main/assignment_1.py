@@ -18,3 +18,26 @@ def root_two():
     
 
 root_two()
+
+#Bisection Method (Question 2) --> referenced code from 2.2 on slide 14 to get output on slide 18 
+import math
+def bisection (f, left, right, tol=1e-3, max_iterations=10):
+    if f(left) * f(right) >= 0:
+        raise ValueError("Function values at interval endpoints have to have opposite signs.")
+    for i in range(max_iterations):
+        mid = (left + right) / 2
+        print(f"Iteration {i+1}: x = {mid}")
+
+        if abs(right-left) < tol:
+            break
+        if (f(left) < 0 and f(mid) > 0 or (f(left) > 0 and f(mid) < 0)):
+            right = mid
+        else: 
+            left = mid
+    print(f"\nConvergence after {i+1} iterations.")
+    return mid 
+
+f = lambda x: x**3 + 4*x**2 - 10
+root = bisection(f, 1, 2)
+
+print(f"Approximate root: {root}")
