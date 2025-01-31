@@ -60,3 +60,24 @@ def fixed_point_iteration(g, p0, tol=1e-3, max_iteration=100):
 
 g = lambda x: (10 - 4*x**2) ** (1/3)
 fixed_point_iteration(g, 1.5)
+
+#Newton-Raphson Method
+import math
+
+def newton(f, df, p0, tol=1e-6, max_iter=100):
+    for i in range(1, max_iter + 1):
+        if df(p0) == 0:
+            print("Failure: Derivative is zero.")
+            return
+        p_next = p0 - f(p0) / df(p0)
+        if abs(p_next - p0) < tol:
+            print(f"Root: {p_next}, SUCCESS in {i} iterations")
+            return
+        p0 = p_next
+    print("Failure: Max iterations reached.")
+
+#given that f(x) = cos(x)-x and f'(x) = -sin(x)-1
+f = lambda x: math.cos(x) - x
+df = lambda x: -math.sin(x) - 1
+
+newton(f, df, 0.5)
