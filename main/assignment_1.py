@@ -19,7 +19,7 @@ def root_two():
 
 root_two()
 
-#Bisection Method (Question 2) --> referenced code from 2.2 on slide 14 to get output on slide 18 
+#Bisection Method -Question 2 --> referenced code from 2.1 on slide 14 to get output on slide 18 
 import math
 def bisection (f, left, right, tol=1e-3, max_iterations=10):
     if f(left) * f(right) >= 0:
@@ -41,3 +41,22 @@ f = lambda x: x**3 + 4*x**2 - 10
 root = bisection(f, 1, 2)
 
 print(f"Approximate root: {root}")
+
+#Fixed-Point Iteration --> output for example in 2.2 on slide 14
+def fixed_point_iteration(g, p0, tol=1e-3, max_iteration=100):
+    i = 1
+
+    while i <= max_iteration:
+        p = g(p0)
+
+        if abs(p-p0) < tol:
+            print(f"{p} Success")
+            return
+
+        i += 1
+        p0 = p
+
+    print("Failure")
+
+g = lambda x: (10 - 4*x**2) ** (1/3)
+fixed_point_iteration(g, 1.5)
